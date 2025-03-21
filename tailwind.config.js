@@ -7,7 +7,11 @@ module.exports = {
     extend: {
       colors: {
         WHITE: '#FFFFFF',
-        PRIMARY: '',
+        PRIMARY: '#0075FF',
+      },
+      fontFamily: {
+        oRegular: ['Outfit-Regular', 'sans-serif'],
+        oBold: ['Outfit-Bold', 'sans-serif'],
       },
     },
   },
