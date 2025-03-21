@@ -1,6 +1,8 @@
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const Index = () => {
+  const router = useRouter();
   ///////////////////////////////////////////////////
   return (
     <View className="flex-1 bg-WHITE">
@@ -18,17 +20,23 @@ const Index = () => {
           industry. Lorem Ipsum has been the industry's standard dummy
         </Text>
 
-        <View className="p-3 bg-WHITE rounded-lg mt-5">
+        <TouchableOpacity
+          className="p-3 bg-WHITE rounded-lg mt-5"
+          onPress={() => router.push('/auth/signUp')}
+        >
           <Text className="text-[13px] text-center color-PRIMARY font-oBold">
             Get Started
           </Text>
-        </View>
+        </TouchableOpacity>
 
-        <View className="p-3 rounded-lg mt-5 bg-PRIMARY border">
+        <TouchableOpacity
+          onPress={() => router.push('/auth/signIn')}
+          className="p-3 rounded-lg mt-5 bg-PRIMARY border"
+        >
           <Text className="text-[13px] text-center color-WHITE font-oRegular">
             Alreay have an account?
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

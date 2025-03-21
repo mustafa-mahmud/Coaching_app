@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         WHITE: '#FFFFFF',
         PRIMARY: '#0075FF',
+        GRAY: '#767473',
       },
       fontFamily: {
         oRegular: ['Outfit-Regular', 'sans-serif'],
