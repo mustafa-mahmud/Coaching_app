@@ -7,9 +7,44 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../../config/firebaseConfig';
+import { UserDetailsContext } from '../../context/userDetailsContext';
 
 const SignUp = () => {
   const router = useRouter();
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { userDetail, setUserDetail } = UserDetailsContext;
+
+  async function createNewAccount() {
+    try {
+      const resp = await createUserWithEmailAndPassword(auth, email, password);
+      const user = resp.user;
+
+      //save user to database
+      await saveUser(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function saveUser(user) {
+    const data = {
+      name: fullName,
+      email,
+      password,
+      member: false,
+      uid: user?.uid,
+    };
+
+    await setDoc(doc(db, 'users', email), data);
+    setUserDetail(data);
+  }
+
   ///////////////////////////////////////////////////
   return (
     <View className="items-center bg-WHITE flex-1 px-4">
@@ -22,18 +57,24 @@ const SignUp = () => {
       <TextInput
         placeholder="Full Name"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
+        onChangeText={(value) => setFullName(value)}
       />
       <TextInput
         placeholder="Email"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
+        onChangeText={(value) => setEmail(value)}
       />
       <TextInput
         secureTextEntry={true}
         placeholder="Password"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
+        onChangeText={(value) => setPassword(value)}
       />
 
-      <TouchableOpacity className="w-full py-3 mt-3 rounded-lg  bg-PRIMARY">
+      <TouchableOpacity
+        onPress={createNewAccount}
+        className="w-full py-3 mt-3 rounded-lg  bg-PRIMARY"
+      >
         <Text className="text-center text-WHITE font-[14px] font-oRegular ">
           Create Account
         </Text>

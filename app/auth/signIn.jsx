@@ -3,13 +3,40 @@ import {
   Pressable,
   Text,
   TextInput,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { auth, db } from './../../config/firebaseConfig.js';
+import { useContext, useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { UserDetailsContext } from '../../context/userDetailsContext.js';
 
 const SignIn = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { userDetail, setUserDetail } = useContext(UserDetailsContext);
+
+  async function onSignInClick() {
+    try {
+      const resp = await signInWithEmailAndPassword(auth, email, password);
+      const user = resp.user;
+
+      console.log(user);
+      await getUserDetail();
+    } catch (error) {
+      ToastAndroid.show('Incorrect Email & Password', ToastAndroid.BOTTOM);
+    }
+  }
+
+  async function getUserDetail() {
+    const resutl = await getDoc(doc(db, 'users', email));
+    setUserDetail(resutl.data());
+  }
+
   ///////////////////////////////////////////////////
   return (
     <View className="items-center bg-WHITE flex-1 px-4">
@@ -22,22 +49,27 @@ const SignIn = () => {
       <TextInput
         placeholder="Email"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
+        onChangeText={(value) => setEmail(value)}
       />
       <TextInput
         secureTextEntry={true}
         placeholder="Password"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
+        onChangeText={(value) => setPassword(value)}
       />
 
-      <TouchableOpacity className="w-full py-3 mt-3 rounded-lg  bg-PRIMARY">
-        <Text className="text-center text-WHITE font-[14px] font-oRegular ">
+      <TouchableOpacity
+        onPress={onSignInClick}
+        className="w-full py-3 mt-3 rounded-lg  bg-PRIMARY"
+      >
+        <Text className="text-center text-WHITE font-[14px] font-oRegular">
           Sign In
         </Text>
       </TouchableOpacity>
 
       <View className="w-full flex-row justify-around mt-7">
-        <Text className="font-[12px] font-oRegular">
-          Have not any account yet
+        <Text className="font-[10px] font-oRegular">
+          Have not any account yet?
         </Text>
         <Pressable onPress={() => router.push('/auth/signUp')}>
           <Text className="text-PRIMARY font-oBold text-center font-[13px]">

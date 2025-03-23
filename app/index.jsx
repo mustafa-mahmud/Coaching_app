@@ -34,7 +34,7 @@ const Index = () => {
           className="p-3 rounded-lg mt-5 bg-PRIMARY border"
         >
           <Text className="text-[13px] text-center color-WHITE font-oRegular">
-            Alreay have an account?
+            Already have an account?
           </Text>
         </TouchableOpacity>
       </View>
