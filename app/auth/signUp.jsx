@@ -58,17 +58,20 @@ const SignUp = () => {
         placeholder="Full Name"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
         onChangeText={(value) => setFullName(value)}
+        value={fullName}
       />
       <TextInput
         placeholder="Email"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
         onChangeText={(value) => setEmail(value)}
+        value={email}
       />
       <TextInput
         secureTextEntry={true}
         placeholder="Password"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
         onChangeText={(value) => setPassword(value)}
+        value={password}
       />
 
       <TouchableOpacity

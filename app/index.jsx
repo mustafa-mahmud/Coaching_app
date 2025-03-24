@@ -1,8 +1,22 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { onAuthStateChanged } from 'firebase/auth';
+import { getDoc, doc } from 'firebase/firestore';
+import { auth, db } from '../config/firebaseConfig.js';
+import { useContext } from 'react';
+import { UserDetailsContext } from '@/context/userDetailsContext.js';
 
 const Index = () => {
   const router = useRouter();
+  const { userDetail, setUserDetail } = useContext(UserDetailsContext);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const result = await getDoc(doc(db, 'users', user?.email));
+      setUserDetail(result.data());
+      router.replace('/(tabs)/home');
+    }
+  });
   ///////////////////////////////////////////////////
   return (
     <View className="flex-1 bg-WHITE">

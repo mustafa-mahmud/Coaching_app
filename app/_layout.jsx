@@ -22,7 +22,7 @@ const RootLayout = () => {
   //////////////////////////////////////////
   return (
     <UserDetailsContext.Provider value={{ userDetail, setUserDetail }}>
-      <Stack screenOptions={{ headerShown: false }} />;
+      <Stack screenOptions={{ headerShown: false }}></Stack>
     </UserDetailsContext.Provider>
   );
 };

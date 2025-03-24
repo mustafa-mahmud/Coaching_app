@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   Pressable,
   Text,
@@ -19,15 +20,21 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { userDetail, setUserDetail } = useContext(UserDetailsContext);
+  const [loading, setLoading] = useState(false);
 
   async function onSignInClick() {
+    setLoading(true);
     try {
       const resp = await signInWithEmailAndPassword(auth, email, password);
       const user = resp.user;
 
-      console.log(user);
       await getUserDetail();
+      setLoading(false);
+
+      router.replace('/(tabs)/home');
     } catch (error) {
+      setLoading(false);
+
       ToastAndroid.show('Incorrect Email & Password', ToastAndroid.BOTTOM);
     }
   }
@@ -50,21 +57,28 @@ const SignIn = () => {
         placeholder="Email"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
         onChangeText={(value) => setEmail(value)}
+        value={email}
       />
       <TextInput
         secureTextEntry={true}
         placeholder="Password"
         className="w-full h-[45px] pl-2 border mt-3 rounded-lg text-sm"
         onChangeText={(value) => setPassword(value)}
+        value={password}
       />
 
       <TouchableOpacity
         onPress={onSignInClick}
+        disabled={loading}
         className="w-full py-3 mt-3 rounded-lg  bg-PRIMARY"
       >
-        <Text className="text-center text-WHITE font-[14px] font-oRegular">
-          Sign In
-        </Text>
+        {!loading ? (
+          <Text className="text-center text-WHITE font-[14px] font-oRegular">
+            Sign In
+          </Text>
+        ) : (
+          <ActivityIndicator size={24} color={'#ffffff'} />
+        )}
       </TouchableOpacity>
 
       <View className="w-full flex-row justify-around mt-7">
