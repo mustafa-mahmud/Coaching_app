@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from 'dedent';
 
 export default {
   IDEA: dedent`:As your are coaching teacher
@@ -28,7 +28,7 @@ export default {
     "banner_image": "/banner1.png",
     "category":"",
     "chapters": [
-      {
+      { 
         chapterName: '',
         content: [
           {
@@ -64,8 +64,5 @@ export default {
     ]
   }
 ]
-    `
-}
-
-
-
+    `,
+};
