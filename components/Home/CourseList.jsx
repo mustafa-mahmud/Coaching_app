@@ -7,7 +7,7 @@ const CourseList = ({ courseList }) => {
   ///////////////////////////////////////////////////
   return (
     <View className="mt-2">
-      <Text className="font-oRegular text-[20px]">Course</Text>
+      <Text className="font-oRegular text-[16px] border-b-[1px]">Courses</Text>
 
       <FlatList
         data={courseList}
@@ -15,7 +15,7 @@ const CourseList = ({ courseList }) => {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => {
           return (
-            <View key={index} className="p-2 bg-gray-100 m-1 rounded-lg">
+            <View key={index} className="p-2 mr-2 bg-gray-100 my-4 rounded-lg">
               <Image
                 source={imageAssets[item.banner_image]}
                 className="w-[200px] h-[150px] rounded-xl"

@@ -73,7 +73,7 @@ const AddCourse = () => {
       });
 
       setLoading(false);
-      // router.push('/(tabs)/home');
+      router.push('/(tabs)/home');
     } catch (error) {
       console.error(error);
       setLoading(false);

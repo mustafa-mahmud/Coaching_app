@@ -1,4 +1,4 @@
-import { Platform, Text, View } from 'react-native';
+import { FlatList, Platform, ScrollView, Text, View } from 'react-native';
 import Header from '../../components/Home/Header';
 import NoCourse from '../../components/Home/NoCourse';
 import { db } from '../../config/firebaseConfig.js';
@@ -6,6 +6,8 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import { UserDetailsContext } from '../../context/userDetailsContext';
 import CourseList from '../../components/Home/CourseList.jsx';
+import PraticeSection from '../../components/Home/PraticeSection.jsx';
+import CourseProgress from '../../components/Home/CourseProgress.jsx';
 
 const Home = () => {
   const { userDetail, setUserDetail } = useContext(UserDetailsContext);
@@ -33,19 +35,28 @@ const Home = () => {
   }, [userDetail]);
   ///////////////////////////////////////////////////
   return (
-    <View
-      className="p-5 flex-1 bg-WHITE"
-      style={{
-        paddingTop: Platform.OS === 'ios' && 45,
-      }}
-    >
-      <Header />
-      {courseList?.length === 0 ? (
-        <NoCourse />
-      ) : (
-        <CourseList courseList={courseList} />
-      )}
-    </View>
+    <FlatList
+      data={[]}
+      ListHeaderComponent={
+        <View
+          className="p-5 flex-1 bg-WHITE"
+          style={{
+            paddingTop: Platform.OS === 'ios' && 45,
+          }}
+        >
+          <Header />
+          {courseList?.length === 0 ? (
+            <NoCourse />
+          ) : (
+            <View className="flex-1">
+              <CourseProgress courseList={courseList} />
+              <PraticeSection />
+              <CourseList courseList={courseList} />
+            </View>
+          )}
+        </View>
+      }
+    />
   );
 };
 
