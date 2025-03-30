@@ -1,9 +1,10 @@
-import { FlatList, Image, Text, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { imageAssets } from '../../constant/Option';
-import { padEnd } from 'lodash';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 const CourseList = ({ courseList }) => {
+  const router = useRouter();
   ///////////////////////////////////////////////////
   return (
     <View className="mt-2">
@@ -15,7 +16,18 @@ const CourseList = ({ courseList }) => {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => {
           return (
-            <View key={index} className="p-2 mr-2 bg-gray-100 my-4 rounded-lg">
+            <TouchableOpacity
+              onPress={() =>
+                router.push({
+                  pathname: '/courseView',
+                  params: {
+                    courseParams: JSON.stringify(item),
+                  },
+                })
+              }
+              key={index}
+              className="p-2 mr-2 bg-gray-100 my-4 rounded-lg"
+            >
               <Image
                 source={imageAssets[item.banner_image]}
                 className="w-[200px] h-[150px] rounded-xl"
@@ -30,7 +42,7 @@ const CourseList = ({ courseList }) => {
                   {item?.chapters?.length} Chapters
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />
