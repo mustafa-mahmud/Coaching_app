@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, ScrollView } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as Progress from 'react-native-progress';
 import { useState } from 'react';
@@ -12,8 +12,6 @@ const ChapterView = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [loader, setLoader] = useState(false);
 
-  console.log(chapterIndex);
-
   function getProgress(currentPage) {
     const perc = currentPage / chapters?.content?.length;
 
@@ -21,17 +19,14 @@ const ChapterView = () => {
   }
 
   async function onChapterComplete() {
-    //save chapter complete
     setLoader(true);
     console.log(docId);
 
     await updateDoc(doc(db, 'Courses', docId), {
       completedChapter: arrayUnion(chapterIndex),
     });
-    //go back
     setLoader(false);
-    router.back();
-    // router.replace('/courseView');
+    router.replace('/courseView/' + docId);
   }
 
   ///////////////////////////////////////////////////

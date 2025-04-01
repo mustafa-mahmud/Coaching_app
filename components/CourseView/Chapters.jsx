@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 const Chapters = ({ course }) => {
   const router = useRouter();
   const isChapterCompleted = (index) => {
-    const isCompleted = course?.completedChapter.find((item) =>
+    const isCompleted = course?.completedChapter?.find((item) =>
       item.includes(index)
     );
 
@@ -19,7 +19,6 @@ const Chapters = ({ course }) => {
 
       <FlatList
         data={course?.chapters}
-        // data={course?.chapters}
         renderItem={({ item, index }) => {
           return (
             <TouchableOpacity
