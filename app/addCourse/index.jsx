@@ -1,6 +1,6 @@
 import { Pressable, Text, TextInput, View, ScrollView } from 'react-native';
 import Button from '../../components/Shared/Button';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {
   GenerateCourseAIModel,
   GenerateTopicsAIModel,
@@ -18,14 +18,12 @@ const AddCourse = () => {
   const [topics, setTopics] = useState([]);
   const [selectedTopics, setSelectedTopic] = useState([]);
   const { userDetail, setUserDetail } = useContext(UserDetailsContext);
-  // const router = useRouter();
 
   async function onGenerateTopic() {
     try {
       setLoading(true);
 
       const PROMPT = userInput + Prompt.IDEA;
-
       const aiResp = await GenerateTopicsAIModel(PROMPT);
       const topicIdea = JSON.parse(aiResp.response.text());
 
@@ -64,11 +62,14 @@ const AddCourse = () => {
 
       console.log(courses);
 
+      if (!courses) throw new Error('That is not JSON formated');
       courses?.forEach(async (course) => {
-        await setDoc(doc(db, 'Courses', Date.now().toString()), {
+        const docId = Date.now().toString();
+        await setDoc(doc(db, 'Courses', docId), {
           ...course,
           createdOn: new Date(),
           createdBy: userDetail?.email,
+          docId: docId,
         });
       });
 
@@ -79,6 +80,7 @@ const AddCourse = () => {
       setLoading(false);
     }
   }
+
   ///////////////////////////////////////////////////
   return (
     <ScrollView className="p-2 bg-WHITE flex-1">
@@ -101,7 +103,7 @@ const AddCourse = () => {
       />
 
       <Button
-        text={'Generate Topic'}
+        text={'Generate Topics'}
         type=""
         onPress={onGenerateTopic}
         loading={loading}

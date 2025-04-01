@@ -2,9 +2,6 @@ import { View, Text, FlatList, Image } from 'react-native';
 import { PraticeOption } from '../../constant/Option';
 
 const PraticeSection = () => {
-  console.clear();
-  console.log(PraticeOption);
-
   ///////////////////////////////////////////////////
   return (
     <View className="mt-5">

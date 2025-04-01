@@ -5,8 +5,10 @@ import Intro from '../../components/CourseView/Intro';
 import Chapters from '../../components/CourseView/Chapters';
 
 const CourseView = () => {
+  console.clear();
   const { courseParams } = useLocalSearchParams();
   const course = JSON.parse(courseParams);
+  console.log(course);
 
   ///////////////////////////////////////////////////
   return (

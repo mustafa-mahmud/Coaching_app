@@ -8,7 +8,7 @@ const CourseList = ({ courseList }) => {
   ///////////////////////////////////////////////////
   return (
     <View className="mt-2">
-      <Text className="font-oRegular text-[16px] border-b-[1px]">Courses</Text>
+      <Text className="font-oRegular text-[16px] border-b-[1px]">Course</Text>
 
       <FlatList
         data={courseList}
