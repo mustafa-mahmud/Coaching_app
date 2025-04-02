@@ -12,8 +12,10 @@ import CourseProgress from '../../components/Home/CourseProgress.jsx';
 const Home = () => {
   const { userDetail, setUserDetail } = useContext(UserDetailsContext);
   const [courseList, setCourseList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function getCourseList() {
+    setLoading(true);
     try {
       setCourseList([]);
       const q = query(
@@ -25,8 +27,11 @@ const Home = () => {
       querySnapshot.forEach((doc) => {
         setCourseList((ps) => [...ps, doc.data()]);
       });
+
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   }
 
@@ -37,6 +42,8 @@ const Home = () => {
   return (
     <FlatList
       data={[]}
+      onRefresh={() => getCourseList()}
+      refreshing={loading}
       ListHeaderComponent={
         <View
           className="p-5 flex-1 bg-WHITE"

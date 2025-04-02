@@ -3,10 +3,17 @@ import { imageAssets } from '../../constant/Option';
 import * as Progress from 'react-native-progress';
 
 const CourseProgress = ({ courseList }) => {
+  function getCompletedChapters(course) {
+    const completedChapter = course?.completedChapter?.length;
+    const perc = completedChapter / course?.chapters?.length;
+
+    return perc;
+  }
+
   ///////////////////////////////////////////////////
   return (
     <View className="mt-2 ">
-      <Text className="font-oRegular">Progress</Text>
+      <Text className="font-oRegular">Progres</Text>
       <FlatList
         data={courseList}
         horizontal={true}
@@ -33,9 +40,13 @@ const CourseProgress = ({ courseList }) => {
                 </View>
               </View>
               <View className="mt-2">
-                <Progress.Bar progress={0} width={270} />
-                <Text className="font-oRegular text-[10px] text-right">
-                  3 Out of 5 Chapter
+                <Progress.Bar
+                  progress={getCompletedChapters(item)}
+                  width={250}
+                />
+                <Text className="font-oRegular text-[10px]">
+                  {item?.completedChapter?.length ?? 0} Out of
+                  {item?.chapters?.length} Chapter
                 </Text>
               </View>
             </View>

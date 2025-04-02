@@ -20,7 +20,6 @@ const ChapterView = () => {
 
   async function onChapterComplete() {
     setLoader(true);
-    console.log(docId);
 
     await updateDoc(doc(db, 'Courses', docId), {
       completedChapter: arrayUnion(chapterIndex),
