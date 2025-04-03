@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
 const CourseList = ({ courseList }) => {
+  console.log(courseList);
+
   const router = useRouter();
   ///////////////////////////////////////////////////
   return (
