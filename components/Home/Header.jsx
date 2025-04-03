@@ -11,10 +11,10 @@ const Header = () => {
   return (
     <View className="flex flex-row justify-between items-center">
       <View>
-        <Text className="font-oBold text-[18px]">
+        <Text className="font-oBold text-[18px] color-WHITE">
           Hello, {userDetail?.name || 'John Doe'}
         </Text>
-        <Text className="font-oRegular">Let's Get Started!</Text>
+        <Text className="font-oRegular color-WHITE">Let's Get Started!</Text>
       </View>
       <TouchableOpacity>
         <Ionicons name="settings-outline" size={30} color={'black'} />

@@ -1,4 +1,12 @@
-import { FlatList, Platform, ScrollView, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Header from '../../components/Home/Header';
 import NoCourse from '../../components/Home/NoCourse';
 import { db } from '../../config/firebaseConfig.js';
@@ -45,22 +53,27 @@ const Home = () => {
       onRefresh={() => getCourseList()}
       refreshing={loading}
       ListHeaderComponent={
-        <View
-          className="p-5 flex-1 bg-WHITE"
-          style={{
-            paddingTop: Platform.OS === 'ios' && 45,
-          }}
-        >
-          <Header />
-          {courseList?.length === 0 ? (
-            <NoCourse />
-          ) : (
-            <View className="flex-1">
-              <CourseProgress courseList={courseList} />
-              <PraticeSection />
-              <CourseList courseList={courseList} />
-            </View>
-          )}
+        <View className="p-2">
+          <Image
+            source={require('../../assets/images/wave.png')}
+            className="absolute h-[250px]"
+          />
+          <View
+            style={{
+              paddingTop: Platform.OS === 'ios' && 45,
+            }}
+          >
+            <Header />
+            {courseList?.length === 0 ? (
+              <NoCourse />
+            ) : (
+              <View className="flex-1">
+                <CourseProgress courseList={courseList} />
+                <PraticeSection />
+                <CourseList courseList={courseList} />
+              </View>
+            )}
+          </View>
         </View>
       }
     />
