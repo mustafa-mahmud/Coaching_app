@@ -51,7 +51,7 @@ const TabLayout = () => {
               />
             );
           },
-          tabBarLabel: 'Progress',
+          tabBarLabel: 'Profile',
         }}
       />
     </Tabs>
