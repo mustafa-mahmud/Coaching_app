@@ -72,7 +72,7 @@ const Flashcards = () => {
         onScroll={onScroll}
         renderItem={({ item, index }) => (
           <View
-            className="mt-7 items-center justify-center"
+            className="items-center justify-center"
             style={{
               width: width * 0.96,
               height: height * 0.8,
