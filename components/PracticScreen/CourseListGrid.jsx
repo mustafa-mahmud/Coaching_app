@@ -7,14 +7,12 @@ const CourseListGrid = ({ courseList, options }) => {
   const router = useRouter();
 
   function onPress(course) {
-    if (options?.name === 'Quiz') {
-      router.push({
-        pathname: '/quiz',
-        params: {
-          courseParams: JSON.stringify(course),
-        },
-      });
-    }
+    router.push({
+      pathname: options.path,
+      params: {
+        courseParams: JSON.stringify(course),
+      },
+    });
   }
 
   ///////////////////////////////////////////////////

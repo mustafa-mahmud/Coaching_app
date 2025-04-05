@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, ScrollView } from 'react-native';
+import { View, Text, Image, FlatList } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import Button from './../../components/Shared/Button';
@@ -31,6 +31,7 @@ const QuizSummery = () => {
   useEffect(() => {
     calculateResult();
   }, []);
+
   ///////////////////////////////////////////////////
 
   return (
@@ -39,11 +40,11 @@ const QuizSummery = () => {
       ListHeaderComponent={
         <View>
           <Image
-            className="w-full h-[700px]"
+            className="w-full h-[500px] absolute"
             source={require('./../../assets/images/wave.png')}
           />
 
-          <View className="absolute w-full p-3">
+          <View className="w-full p-3">
             <Text className="text-center font-oBold text-[22px] color-WHITE">
               Quiz Summery
             </Text>

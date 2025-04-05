@@ -1,12 +1,4 @@
-import {
-  FlatList,
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Image, Platform, View } from 'react-native';
 import Header from '../../components/Home/Header';
 import NoCourse from '../../components/Home/NoCourse';
 import { db } from '../../config/firebaseConfig.js';

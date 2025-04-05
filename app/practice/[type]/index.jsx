@@ -18,7 +18,6 @@ const PracticeTypeHome = () => {
   const { userDetail, setUserDetail } = useContext(UserDetailsContext);
   const [loading, setLoading] = useState(false);
   const [courseList, setCourseList] = useState([]);
-
   async function getCourseList() {
     setLoading(true);
     setCourseList([]);
